@@ -1,0 +1,19 @@
+<!--categories/index
+-->
+<% content_for :title do %>
+  EDURGE
+  |
+  Categories
+<% end %>
+<div class="text-center text-white">
+  <h3>
+    <div class="fa fa-bookmark"></div>
+    <%= pluralize(Category.count, 'category') %>
+  </h3>
+</div>
+<p></p>
+<div class="card-columns">
+  <% @categories.each do |category| %>
+    <%= render 'categories/category', category: category %>
+  <% end %>
+</div>

@@ -1,0 +1,15 @@
+.row
+  .col-lg-3
+  .col-lg-6
+    .card
+      .card-header
+        %h4
+          .fa.fa-graduation-cap
+          = link_to @subscription.course.name, course_path(@subscription.course)
+          %hr
+          .text-warning.fa.fa-star
+          Add a Review
+      .card-body
+        = render 'form'
+      .card-footer
+        = link_to 'Cancel', course_path(@subscription.course)

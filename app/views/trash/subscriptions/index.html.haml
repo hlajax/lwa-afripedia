@@ -1,0 +1,62 @@
+.text-center.text-white
+  %h3
+    .fa.fa-lock-open
+    = action_name.humanize + ":"
+    = pluralize(@subscriptions.count, 'subscription')
+%p
+%table#table1
+  %thead
+    %tr
+      %th
+        .fa.fa-user
+        user
+      %th
+        .fa.fa-envelope
+        email
+      %th
+        .fa.fa-clock
+        .fa.fa-lock-open
+        bought
+      %th
+        .fa.fa-graduation-cap
+        course
+      %th
+        .fa.fa-dollar-sign
+        paid
+      %th
+        .fa.fa-spinner
+        progress
+      %th
+        .text-warning.fa.fa-clock
+        reviewed
+      %th
+        .text-warning.fa.fa-star
+        rating
+      %th
+        .text-warning.fa.fa-comment
+        feedback
+      %th
+      %th
+
+  %tbody
+    - @subscriptions.each do |subscription|
+      %tr
+        %td= link_to subscription.user, user_path(subscription.user)
+        %td= subscription.user.email
+        %td= subscription.created_at.strftime('%d/%b/%Y')
+        %td= link_to subscription.course, course_path(subscription.course)
+        %td= number_to_currency(subscription.price)
+        %td= number_to_percentage(subscription.course.progress(subscription.user), precision: 0)
+
+        %td
+          - if subscription.rating.present?
+            = subscription.updated_at.strftime('%d/%b/%Y')
+        %td= subscription.rating
+        %td= subscription.comment
+        %td
+          - if policy(subscription).edit?
+            = link_to 'Review', edit_subscription_path(subscription)
+        %td
+          - if policy(subscription).destroy?
+            = link_to 'Unsubscribe', subscription, method: :delete, data: { confirm: 'Are you sure?' }
+%p

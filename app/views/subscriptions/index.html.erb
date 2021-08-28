@@ -1,0 +1,99 @@
+<div class="text-center text-white">
+  <h3>
+    <div class="fa fa-lock-open"></div>
+    <%= action_name.humanize + ":" %>
+    <%= pluralize(@subscriptions.count, 'subscription') %>
+  </h3>
+</div>
+<p></p>
+<table id="table1">
+  <thead>
+    <tr>
+      <th>
+        <div class="fa fa-user"></div>
+        user
+      </th>
+      <th>
+        <div class="fa fa-envelope"></div>
+        email
+      </th>
+      <th>
+        <div class="fa fa-clock"></div>
+        <div class="fa fa-lock-open"></div>
+        bought
+      </th>
+      <th>
+        <div class="fa fa-graduation-cap"></div>
+        course
+      </th>
+      <th>
+        <div class="fa fa-dollar-sign"></div>
+        paid
+      </th>
+      <th>
+        <div class="fa fa-spinner"></div>
+        progress
+      </th>
+      <th>
+        <div class="text-warning fa fa-clock"></div>
+        reviewed
+      </th>
+      <th>
+        <div class="text-warning fa fa-star"></div>
+        rating
+      </th>
+      <th>
+        <div class="text-warning fa fa-comment"></div>
+        feedback
+      </th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @subscriptions.each do |subscription| %>
+      <tr>
+        <td>
+          <%= link_to subscription.user, user_path(subscription.user) %>
+        </td>
+        <td>
+          <%= subscription.user.email %>
+        </td>
+        <td>
+          <%= subscription.created_at.strftime('%d/%b/%Y') %>
+        </td>
+        <td>
+          <%= link_to subscription.course, course_path(subscription.course) %>
+        </td>
+        <td>
+          <%= number_to_currency(subscription.price) %>
+        </td>
+        <td>
+          <%= number_to_percentage(subscription.course.progress(subscription.user), precision: 0) %>
+        </td>
+        <td>
+          <% if subscription.rating.present? %>
+            <%= subscription.updated_at.strftime('%d/%b/%Y') %>
+          <% end %>
+        </td>
+        <td>
+          <%= subscription.rating %>
+        </td>
+        <td>
+          <%= subscription.comment %>
+        </td>
+        <td>
+          <% if policy(subscription).edit? %>
+            <%= link_to 'Review', edit_subscription_path(subscription) %>
+          <% end %>
+        </td>
+        <td>
+          <% if policy(subscription).destroy? %>
+            <%= link_to 'Unsubscribe', subscription, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<p></p>

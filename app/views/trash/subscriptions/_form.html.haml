@@ -1,0 +1,16 @@
+-# frozen_string_literal: true
+= simple_form_for(@subscription) do |f|
+  = f.error_notification
+  = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
+
+  .form-inputs
+
+    - unless f.object.new_record?
+      = f.input :rating, collection: 1..5, as: :radio_buttons
+      = f.input :comment, input_html: { autocomplete: 'nope' }, :input_html => {:rows => 7}
+    - else
+      %h4= number_to_currency(@course.price)
+
+  .form-actions
+    = f.button :submit, class: 'btn btn-md btn-primary'
+    /= f.submit 'Subscribe', class: 'btn btn-md btn-primary'

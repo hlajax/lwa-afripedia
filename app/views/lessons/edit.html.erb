@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="col-lg-2"></div>
+  <div class="col-lg-8">
+    <div class="card">
+      <div class="card-header">
+        <div class="fa fa-graduation-cap"></div>
+        <%= link_to @course.name, course_path(@course) %>
+      </div>
+      <div class="card-header">
+        <h4>
+          <div class="fa fa-book"></div>
+          Editing lesson
+        </h4>
+      </div>
+      <div class="card-body">
+        <%= render 'form' %>
+      </div>
+      <div class="card-footer">
+        <%= link_to 'Cancel', course_path(@course) %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+<div class="card">
+  <div class="card-header">
+    <div class="fa fa-user"></div>
+    <%= link_to subscription.user.username, user_path(subscription.user) %>
+    <div class="fa fa-clock"></div>
+    <%= time_ago_in_words(subscription.created_at) %>
+    ago
+    <!--= subscription.created_at.strftime('%d/%b/%Y')
+    -->
+    <div class="fa fa-graduation-cap"></div>
+    <%= link_to subscription.course, course_path(subscription.course) %>
+  </div>
+  <div class="card-footer">
+    <div class="text-warning fa fa-star"></div>
+    <b>
+      <%= subscription.rating %>
+    </b>
+    <div class="fa fa-comment"></div>
+    <small>
+      <%= subscription.comment %>
+    </small>
+  </div>
+  <% if current_user %>
+    <div class="card-footer">
+      <% if policy(subscription).edit? %>
+        <%= link_to 'Edit', edit_subscription_path(subscription), class: 'btn btn-sm btn-primary' %>
+        <%= link_to 'Remove', remove_review_subscription_path(subscription), method: :patch, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger' %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

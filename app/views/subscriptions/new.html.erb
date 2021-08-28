@@ -1,0 +1,24 @@
+<div class="row">
+  <div class="col-lg-3"></div>
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-header">
+        <h4>
+          <div class="fa fa-graduation-cap"></div>
+          <%= link_to @course.name, course_path(@course) %>
+          <hr/>
+          <div class="fa fa-lock-open"></div>
+          Buy course
+        </h4>
+      </div>
+      <div class="card-body">
+        <%= form_tag course_subscriptions_path(@course) do %>
+          <%= submit_tag "Pay #{@course.price} &euro;".html_safe, class: "btn btn-success btn-md btn-block" %>
+        <% end %>
+      </div>
+      <div class="card-footer">
+        <%= link_to 'Cancel', course_path(@course) %>
+      </div>
+    </div>
+  </div>
+</div>

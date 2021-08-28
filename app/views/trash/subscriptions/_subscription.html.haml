@@ -1,0 +1,24 @@
+.card
+  .card-header
+    .fa.fa-user
+    = link_to subscription.user.username, user_path(subscription.user)
+
+    .fa.fa-clock
+    = time_ago_in_words(subscription.created_at)
+    ago
+    /= subscription.created_at.strftime('%d/%b/%Y')
+
+    .fa.fa-graduation-cap
+    = link_to subscription.course, course_path(subscription.course)
+
+  .card-footer
+    .text-warning.fa.fa-star
+    %b= subscription.rating
+    .fa.fa-comment
+    %small= subscription.comment
+
+  - if current_user
+    .card-footer
+      - if policy(subscription).edit?
+        = link_to 'Edit', edit_subscription_path(subscription), class: 'btn btn-sm btn-primary'
+        = link_to 'Remove', remove_review_subscription_path(subscription), method: :patch, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger'

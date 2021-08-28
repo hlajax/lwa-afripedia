@@ -1,0 +1,18 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  host: localhost
+  user: postgres
+  password: Mypostgresp@ssword10
+development:
+  <<: *default
+  database: lwaafripedia_development
+
+test:
+  <<: *default
+  database: lwaafripedia_test
+
+production:
+  <<: *default
+  database: lwaafripedia_production

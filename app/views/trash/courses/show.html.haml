@@ -1,0 +1,70 @@
+/course/show
+- content_for :title do
+  EDURGE
+  |
+  = @course.name
+
+.text-white
+  .fa.fa-bookmark
+  = link_to @course.category, category_path(@course.category)
+  >
+  .fa.fa-graduation-cap
+  = @course.name
+
+.row
+  .col-lg-8.order-1.order-lg-0
+    .jumbotron
+      %h3
+        .fa.fa-graduation-cap
+        %b= @course.name
+      %p
+      .fa.fa-clock
+      Last updated
+      = @course.updated_at.strftime('%m/%Y')
+      .row
+      .fa.fa-comment
+      = @course.language
+      .row
+      .fa.fa-signal
+      = @course.level
+      .row
+      .fa.fa-clock
+      %b Duration:
+      = @course.duration 
+      min
+      .row
+      %b Price:
+      = number_to_currency(@course.price)
+      .row
+      %b Description:
+      %small= simple_format(@course.description)
+
+    .text-white
+      %h4
+        .fa.fa-book
+        = pluralize(@course.lessons_count, 'lesson')
+        .float-right
+          .fa.fa-spinner
+          = number_to_percentage(@course.progress(current_user), precision: 0)
+          /.progress
+          /  .progress-bar{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "#{@course.progress(current_user)}", :role => "progressbar", :style => "width: #{@course.progress(current_user)}%;"} #{@course.progress(current_user).round(2)}%
+
+
+    .list-group.lesson-sortable
+      - @lessons.each do |lesson|
+        = content_tag "div", id: "lesson-#{lesson.id}", data: { model_name: lesson.class.name.underscore, update_url: lesson_sort_path(lesson)} do
+          .list-group-item
+            = render 'lessons/lesson_preview', lesson: lesson
+    %p
+    .text-white
+      %h4
+        .fa.fa-comment
+        = pluralize(@subscriptions.count, 'review')
+    - @subscriptions.each do |subscription|
+      = render 'subscriptions/subscription', subscription: subscription
+      %p
+
+  .col-lg-4.order-0.order-lg-1
+    .sticky-top
+      = render 'courses/course', course: @course
+    %p

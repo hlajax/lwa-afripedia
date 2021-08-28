@@ -1,0 +1,15 @@
+.row
+  .col-lg-2
+  .col-lg-8
+    .card
+      .card-header
+        .fa.fa-graduation-cap
+        = link_to @course.name, course_path(@course)
+      .card-header
+        %h4
+          .fa.fa-book
+          New lesson
+      .card-body
+        = render 'form'
+      .card-footer
+        = link_to 'Cancel', course_path(@course)

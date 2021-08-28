@@ -1,0 +1,27 @@
+<!--category/show
+-->
+<% content_for :title do %>
+  EDURGE
+  |
+  Categories
+  |
+  <%= @category.name %>
+<% end %>
+<div class="text-center text-white">
+  <h3>
+    <div class="fa fa-bookmark"></div>
+    Category
+  </h3>
+</div>
+<%= render 'categories/category', category: @category %>
+<div class="text-center text-white">
+  <h3>
+    <div class="fa fa-graduation-cap"></div>
+    <%= pluralize(@courses.count, 'course') %>
+  </h3>
+</div>
+<div class="card-columns">
+  <% @courses.each do |course| %>
+    <%= render 'courses/course', course: course %>
+  <% end %>
+</div>

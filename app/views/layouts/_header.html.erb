@@ -1,0 +1,161 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-success">
+  <a class="navbar-brand" href="/">
+    <div class="text-light">
+      <b>
+        <div class="fa fa-graduation-cap"></div>
+        EDURGE
+      </b>
+    </div>
+  </a>
+  <% if current_user %>
+    <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarSupportedContent" data-toggle="collapse" type="button">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <%= link_to categories_path, class: 'nav-link' do %>
+            <div class="fa fa-bookmark"></div>
+            <b>Categories</b>
+          <% end %>
+        </li>
+        <div class="form-inline my-2 my-lg-0">
+          <%= form_tag(courses_path, method: :get) do %>
+            <div class="input-group">
+              <%= text_field_tag :name, params[:name], autocomplete: 'off', placeholder: "Find a course", class: 'form-control-sm' %>
+              <span class="input-group-append">
+                <button class="btn btn-primary btn-sm" type="submit">
+                  <span aria-hidden="true" class="fa fa-search"></span>
+                </button>
+              </span>
+            </div>
+          <% end %>
+        </div>
+        <div class="ml-5"></div>
+        <div class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
+            <div class="fa fa-graduation-cap"></div>
+            <b>Learn</b>
+          </a>
+          <div aria-labelledby="navbarDropdown" class="dropdown-menu">
+            <!--= link_to subscriptions_path, class: "dropdown-item" do
+            -->
+            <%= link_to purchased_courses_path, class: "dropdown-item" do %>
+              <div class="fa fa-graduation-cap"></div>
+              <b>Purchased courses</b>
+              <div class="badge badge-danger">
+                <%= current_user.subscriptions.count %>
+              </div>
+            <% end %>
+            <%= link_to pending_review_courses_path, class: "dropdown-item" do %>
+              <div class="fa fa-star"></div>
+              <b>Pending review</b>
+              <div class="badge badge-danger">
+                <%= current_user.subscriptions.pending_review.count %>
+              </div>
+            <% end %>
+            <!--.dropdown-divider
+            -->
+          </div>
+        </div>
+        <% if current_user.has_role?(:teacher) %>
+          <div class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
+              <div class="fa fa-chalkboard-teacher"></div>
+              <b>Teach</b>
+            </a>
+            <div aria-labelledby="navbarDropdown" class="dropdown-menu">
+              <%= link_to new_course_path, class: "dropdown-item" do %>
+                <div class="fa fa-graduation-cap"></div>
+                <div class="fa fa-plus"></div>
+                <b>Add course</b>
+              <% end %>
+              <%= link_to created_courses_path, class: "dropdown-item" do %>
+                <div class="fa fa-graduation-cap"></div>
+                <b>Created courses</b>
+                <div class="badge badge-danger">
+                  <%= current_user.courses.count %>
+                </div>
+              <% end %>
+              <%= link_to my_students_subscriptions_path, class: "dropdown-item" do %>
+                <div class="fa fa-user"></div>
+                <b>My students</b>
+                <div class="badge badge-danger">
+                  <%= Subscription.joins(:course).where(courses: {user: current_user}).count %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+        <% if current_user.has_role?(:admin) %>
+          <div class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
+              <div class="fa fa-cogs"></div>
+              <b>Admin</b>
+            </a>
+            <div aria-labelledby="navbarDropdown" class="dropdown-menu">
+              <%= link_to new_category_path, class: "dropdown-item" do %>
+                <div class="fa fa-bookmark"></div>
+                <div class="fa fa-plus"></div>
+                <b>Add Category</b>
+              <% end %>
+              <%= link_to published_unapproved_courses_path, class: "dropdown-item" do %>
+                <div class="fa fa-graduation-cap"></div>
+                <b>Unapproved courses</b>
+                <div class="badge badge-danger">
+                  <%= Course.published.unapproved.count %>
+                </div>
+              <% end %>
+              <%= link_to subscriptions_path, class: "dropdown-item" do %>
+                <div class="fa fa-lock-open"></div>
+                <b>All Subscriptions</b>
+                <div class="badge badge-danger">
+                  <%= Subscription.count %>
+                </div>
+              <% end %>
+              <%= link_to users_path, class: "dropdown-item" do %>
+                <div class="fa fa-users"></div>
+                <b>All Users</b>
+                <div class="badge badge-danger">
+                  <%= User.count %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </ul>
+      <ul class="navbar-nav mr-right">
+        <div class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
+            <div class="fa fa-user"></div>
+            <b>
+              <%= current_user.username %>
+            </b>
+          </a>
+          <div aria-labelledby="navbarDropdown" class="dropdown-menu dropdown-menu-right">
+            <%= link_to user_path(current_user), class: "dropdown-item" do %>
+              <div class="fa fa-user"></div>
+              <b>My profile</b>
+            <% end %>
+            <%= link_to edit_user_registration_path, class: "dropdown-item" do %>
+              <div class="fa fa-cog"></div>
+              <b>Account settings</b>
+            <% end %>
+            <%= link_to destroy_user_session_path, method: :delete, class: "dropdown-item" do %>
+              <div class="fa fa-sign-out-alt"></div>
+              <b>Sign out</b>
+            <% end %>
+          </div>
+        </div>
+      </ul>
+    </div>
+  <% else %>
+    <ul class="navbar-nav mr-auto navbar-right"></ul>
+    <div class="nav-link">
+      <%= link_to 'Sign Up', new_user_registration_path, class: 'btn btn-outline-dark' %>
+    </div>
+    <div class="nav-link">
+      <%= link_to 'Log In', new_user_session_path, class: 'btn btn-outline-dark' %>
+    </div>
+  <% end %>
+</nav>

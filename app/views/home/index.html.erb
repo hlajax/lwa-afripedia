@@ -1,0 +1,87 @@
+<div class="container-fluid top-menu text-white">
+  <div class="row p-2">
+    <div class="col-lg-2">
+      <h5>Afripédia</h5>
+    </div>
+    <div class="col-lg-5">
+      <%= form_tag(courses_path, class:"row row-cols-lg-auto g-3 align-items-center", method: :get) do %>
+            <div class="input-group mb-3">
+              <%= text_field_tag :name, params[:name], autocomplete: 'off', placeholder: "Trouver un cours", class: 'form-control' %>
+                <button class="btn btn-primary" type="submit">
+                  Trouver un cours
+                </button>
+            </div>
+          <% end %>
+    </div>
+    <div class="col-lg-5">
+     <%=render 'menus/main'%>
+    </div>
+  </div>
+</div>
+<div class="container-fluid bg-white">
+  <div class="row">
+    <div class="col-lg-12 col-12">
+      <nav class="nav nav-pills nav-fill nav-cat">
+        <% @categories.each do |categorie| %>
+                  <%=link_to categorie.name, courses_path(categorie: categorie.name), class:"nav-link"%>
+                <% end %>
+  </div>
+  </div>
+  </div>
+<div class="container-fluid" style="background:url('https://res.cloudinary.com/aseed/image/upload/v1630187453/afripedia/92a752b4-2f5b-45c7-a451-d84b32ccb0cf-removebg-preview_waw227.png')no-repeat;background-size:cover;height: 400px;">
+  <div class="row">
+    <div class="col-lg-4 offset-lg-1 col-12" style="margin-top:5%;padding: 2.5%;">
+      <h2 class="fw-bold" style="font-size: 40px;">
+        Un apprentissage <br>qui vous ressemble 
+      </h2>
+      <p>
+        Les cours sont à partir de 13,99 $US. Appliquez le code PLUS10 à votre panier pour bénéficier de 10 % de réduction supplémentaires.
+      </p>
+      <button type="button" class="btn btn-vert">commencer un cours</button>
+    </div>
+  </div>
+</div>
+<div class="container-fluid bg-white">
+  <div class="row">
+    <div class="col-lg-12 col-12">
+      <nav class="nav nav-pills nav-justified">
+        <% @categories.each do |categorie| %>
+                  <%=link_to categorie.name, courses_path(categorie: categorie.name), class:"nav-link"%>
+                <% end %>
+  </div>
+  </div>
+  </div>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12 col-12">
+      <h3>récents</h3>
+<div class="row row-cols-1 row-cols-md-4 g-4">
+  <% @latest_courses.each do |course| %>
+  <div class="col">
+    <%= render 'courses/course', course: course %>
+</div>
+<% end %>
+</div>
+    </div>
+     <div class="col-lg-12 col-12">
+      <h3>populaires</h3>
+      <div class="row row-cols-1 row-cols-md-4 g-4">
+          <% @popular_courses.each do |course| %>
+  <div class="col">
+        <%= render 'courses/course', course: course %>
+  <% end %>
+  </div>
+</div>
+    </div>
+    <div class="col-lg-12 col-12">
+      <h3>mieux notés</h3>
+      <div class="row row-cols-1 row-cols-md-4 g-4">
+          <% @top_rated_courses.each do |course| %>
+  <div class="col">
+        <%= render 'courses/course', course: course %>
+  <% end %>
+  </div>
+</div>
+    </div>
+  </div>
+</div>

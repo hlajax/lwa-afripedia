@@ -1,0 +1,18 @@
+-# frozen_string_literal: true
+= simple_form_for(@course) do |f|
+  = f.error_notification
+  = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
+
+  .form-inputs
+    = f.association :category, as: :radio_buttons
+    = f.input :name, input_html: { autocomplete: 'nope' }
+    = f.input :short_description, input_html: { autocomplete: 'nope' }, :input_html => {:rows => 3}
+    = f.input :description, input_html: { autocomplete: 'nope' }, :input_html => {:rows => 7}
+    = f.input :language, priority: [ "English" ], collection: [ "English", "German", "French", "Russian", "Spanish", "Ukrainian", "Polish"], as: :radio_buttons
+    /= f.input :duration
+    = f.input :price, priority: [ "9.99" ], collection: [ "0", "9.99", "19.99", "49.99", "99.99", "149.99", "199.99"], as: :radio_buttons
+    = f.input :level, collection: [ "beginner", "intermediate", "advanced"], as: :radio_buttons
+    = f.input :published
+
+  .form-actions
+    = f.button :submit, class: 'btn btn-md btn-primary'

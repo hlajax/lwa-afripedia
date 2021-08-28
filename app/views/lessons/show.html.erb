@@ -1,0 +1,38 @@
+<!--lesson/show
+-->
+<% content_for :title do %>
+  EDURGE
+  |
+  <%= @course.name %>
+  | 
+  <%= @lesson.name %>
+<% end %>
+<div class="row">
+  <div class="col-lg-8">
+    <%= render 'lessons/lesson', lesson: @lesson %>
+    <p></p>
+  </div>
+  <div class="col-lg-4">
+    <div class="list-group">
+      <div class="list-group-item">
+        <div class="fa fa-graduation-cap"></div>
+        <%= link_to @course.name, course_path(@course) %>
+        <div class="float-rigt">
+          <div class="fa fa-spinner"></div>
+          <%= number_to_percentage(@course.progress(current_user), precision: 0) %>
+        </div>
+      </div>
+      <% @lessons.each do |lesson| %>
+        <% if @lesson.present? && lesson == @lesson %>
+          <div class="list-group-item list-group-item-success">
+            <%= render 'lessons/lesson_preview', lesson: lesson %>
+          </div>
+        <% else %>
+          <div class="list-group-item">
+            <%= render 'lessons/lesson_preview', lesson: lesson %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

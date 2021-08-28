@@ -1,0 +1,27 @@
+<div class="card">
+  <div class="card-header">
+    <div class="fa fa-bookmark"></div>
+    <%= link_to category.name, category %>
+  </div>
+  <div class="card-body">
+    <small>
+      <%= simple_format(category.description) %>
+    </small>
+  </div>
+  <div class="card-footer">
+    <div class="fa fa-graduation-cap"></div>
+    <%= pluralize(category.courses.approved.published.count, 'course') %>
+  </div>
+  <% if current_user %>
+    <% if policy(category).edit? %>
+      <div class="card-footer">
+        <%= link_to 'Edit', edit_category_path(category), class: 'btn btn-sm btn-warning' %>
+        <% unless category.courses.any? %>
+          <% if policy(category).destroy? %>
+            <%= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger' %>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
+</div>
