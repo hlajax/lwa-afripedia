@@ -8,5 +8,12 @@ class DashboardController < ApplicationController
     @latest_good_subscriptions = Subscription.rated.order(rating: :desc, created_at: :desc).limit(3)
     @purchased_courses = Course.joins(:subscriptions).where(subscriptions: {user: current_user}).order(created_at: :desc).limit(3)
     @categories = Category.all.order('name ASC')
+    @attente = Course.published.unapproved.order(updated_at: :desc)
+    @nope_courses = Course.published.unapproved.order(created_at: :desc).limit(8)
+  end
+    def published_unapproved
+    @courses = Course.published.unapproved.order(updated_at: :desc)
+    authorize @courses, :approve?
+    render 'index'
   end
 end
