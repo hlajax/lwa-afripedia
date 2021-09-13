@@ -12,7 +12,7 @@
     <!--= f.input :duration
     -->
     <%= f.input :price, priority: [ "9.99" ], collection: [ "0", "9.99", "19.99", "49.99", "99.99", "149.99", "199.99"], as: :radio_buttons %>
-    <%= f.input :level, collection: [ "débutant", "moyen", "dur"], as: :radio_buttons %>
+    <%= f.input :level, collection: [ "beginner", "intermediate", "advanced"], as: :radio_buttons %>
     <%= f.input :published %>
   </div>
   <div class="form-actions">
