@@ -1,63 +1,79 @@
-<!--course/show
--->
 <% content_for :title do %>
-  EDURGE
+  AfriPédia
   |
   <%= @course.name %>
 <% end %>
-<div class="text-white">
-  <div class="fa fa-bookmark"></div>
-  <%= link_to @course.category, category_path(@course.category) %>
-  >
-  <div class="fa fa-graduation-cap"></div>
-  <%= @course.name %>
-</div>
-<div class="row">
-  <div class="col-lg-8 order-1 order-lg-0">
-    <div class="jumbotron">
-      <h3>
-        <div class="fa fa-graduation-cap"></div>
-        <b>
-          <%= @course.name %>
-        </b>
-      </h3>
-      <p></p>
-      <div class="fa fa-clock"></div>
-      Last updated
-      <%= @course.updated_at.strftime('%m/%Y') %>
-      <div class="row"></div>
-      <div class="fa fa-comment"></div>
-      <%= @course.language %>
-      <div class="row"></div>
-      <div class="fa fa-signal"></div>
-      <%= @course.level %>
-      <div class="row"></div>
-      <div class="fa fa-clock"></div>
-      <b>Duration:</b>
-      <%= @course.duration  %>
-      min
-      <div class="row"></div>
-      <b>Price:</b>
-      <%= number_to_currency(@course.price) %>
-      <div class="row"></div>
-      <b>Description:</b>
-      <small>
-        <%= simple_format(@course.description) %>
-      </small>
+<div class="container-fluid top-menu text-white">
+  <div class="row p-2">
+    <div class="col-lg-2">
+      <h5>Afripédia</h5>
     </div>
-    <div class="text-white">
-      <h4>
+    <div class="col-lg-5">
+      <%= form_tag(courses_path, class:"row row-cols-lg-auto g-3 align-items-center", method: :get) do %>
+            <div class="input-group mb-3">
+              <%= text_field_tag :name, params[:name], autocomplete: 'off', placeholder: "Trouver un cours", class: 'form-control' %>
+                <button class="btn btn-primary" type="submit">
+                  Trouver un cours
+                </button>
+            </div>
+          <% end %>
+    </div>
+    <div class="col-lg-5">
+     <%=render 'menus/main'%>
+    </div>
+  </div>
+</div>
+<div class="container-fluid" style="background:url('<%=@course.thumbnail.url %>'); background-size:cover; background-position:center;">
+  <div class="row align-items-center" style="background: rgba(0,0,0,.5);height: 400px;color:white;">
+    <div class="col-lg-8 offset-lg-2 text-center">
+      <h2><%= @course.name%></h2>
+      <h3><%= raw(@course.short_description) %></h3>
+      <p>
+        <span>Auteur: <%= @course.user.username%></span>
+        <span> Notes: <%= @course.average_rating %></span>
+        <span> Inscrits:<%=@course.subscriptions_count%></span>
+      </p>
+    </div>
+  </div>
+</div>
+<div class="container-fluid">
+  <div class="row bg-white p-4">
+    <div class="col-lg-8 offset-2 col-12">
+       <div class="fa fa-graduation-cap"></div>
+        <h4>
+          Description
+        </h4>
+        <p>
+          <%= raw(@course.description) %>
+        </p>
+    </div>
+  </div>
+</div>
+<div class="container-fluid">
+  <div class="row bg-white p-4">
+  <div class="col-lg-8 offset-2 col-12 order-1 order-lg-0">
+    <div>
+       <h4>
+          Contenu du cours
+        </h4>
+      <h5>
         <div class="fa fa-book"></div>
-        <%= pluralize(@course.lessons_count, 'lesson') %>
+        <%= pluralize(@course.lessons_count, 'leçon') %>
         <div class="float-right">
           <div class="fa fa-spinner"></div>
           <%= number_to_percentage(@course.progress(current_user), precision: 0) %>
+          
+          <div class="progress">
+  <div class="progress-bar" role="progressbar" style="width: <%= number_to_percentage(@course.progress(current_user), precision: 0) %>;" aria-valuenow="<%= @course.progress(current_user) %>" aria-valuemin="0" aria-valuemax="100">
+    <%= @course.progress(current_user) %>
+  </div>
+</div>
           <!--.progress
           -->
           <!--  .progress-bar{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "#{@course.progress(current_user)}", :role => "progressbar", :style => "width: #{@course.progress(current_user)}%;"} #{@course.progress(current_user).round(2)}%
           -->
         </div>
-      </h4>
+      </h5>
     </div>
     <div class="list-group lesson-sortable">
       <% @lessons.each do |lesson| %>
@@ -79,11 +95,21 @@
       <%= render 'subscriptions/subscription', subscription: subscription %>
       <p></p>
     <% end %>
+     <div class="fa fa-clock"></div>
+      Last updated
+      <%= @course.updated_at.strftime('%m/%Y') %>
+      <div class="row"></div>
+      <b>Langue:</b>
+      <%= @course.language %>
+      <div class="row"></div>
+      <div class="row"></div>
+      <div class="fa fa-clock"></div>
+      <b>Durée:</b>
+      <%= @course.duration  %>
+      min
+      <div class="row"></div>
+      <b>Prix:</b>
+      <%= number_to_currency(@course.price) %>
   </div>
-  <div class="col-lg-4 order-0 order-lg-1">
-    <div class="sticky-top">
-      <%= render 'courses/course', course: @course %>
-    </div>
-    <p></p>
-  </div>
+</div>
 </div>

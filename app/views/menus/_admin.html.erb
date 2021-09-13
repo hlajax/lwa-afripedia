@@ -3,28 +3,28 @@
         <li class="nav-item">
           <%= link_to categories_path, class: 'nav-link' do %>
             <div class="fa fa-bookmark"></div>
-            <b>Catégories</b>
+            <b>Categories</b>
           <% end %>
         </li>
         <div class="ml-5"></div>
         <div class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
             <div class="fa fa-graduation-cap"></div>
-            <b>Apprendre</b>
+            <b>Learn</b>
           </a>
           <div aria-labelledby="navbarDropdown" class="dropdown-menu">
             <!--= link_to subscriptions_path, class: "dropdown-item" do
             -->
             <%= link_to purchased_courses_path, class: "dropdown-item" do %>
               <div class="fa fa-graduation-cap"></div>
-              <b>Cours</b>
+              <b>Purchased courses</b>
               <div class="badge badge-danger">
                 <%= current_user.subscriptions.count %>
               </div>
             <% end %>
             <%= link_to pending_review_courses_path, class: "dropdown-item" do %>
               <div class="fa fa-star"></div>
-              <b>Révision en cours</b>
+              <b>Pending review</b>
               <div class="badge badge-danger">
                 <%= current_user.subscriptions.pending_review.count %>
               </div>
@@ -36,24 +36,24 @@
         <% if current_user.has_role?(:teacher) %>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
-              <b>Prof</b>
+              <b>Teach</b>
             </a>
             <div aria-labelledby="navbarDropdown" class="dropdown-menu">
               <%= link_to new_course_path, class: "dropdown-item" do %>
                 <div class="fa fa-graduation-cap"></div>
                 <div class="fa fa-plus"></div>
-                <b>Ajouter un cours</b>
+                <b>Add course</b>
               <% end %>
               <%= link_to created_courses_path, class: "dropdown-item" do %>
                 <div class="fa fa-graduation-cap"></div>
-                <b>Cours crées</b>
+                <b>Created courses</b>
                 <div class="badge badge-danger">
                   <%= current_user.courses.count %>
                 </div>
               <% end %>
               <%= link_to my_students_subscriptions_path, class: "dropdown-item" do %>
                 <div class="fa fa-user"></div>
-                <b>Mes apprenants</b>
+                <b>My students</b>
                 <div class="badge badge-danger">
                   <%= Subscription.joins(:course).where(courses: {user: current_user}).count %>
                 </div>
@@ -107,24 +107,24 @@
           <div aria-labelledby="navbarDropdown" class="dropdown-menu dropdown-menu-right">
             <%= link_to user_path(current_user), class: "dropdown-item" do %>
               <div class="fa fa-user"></div>
-              <b>Mon profil</b>
+              <b>My profile</b>
             <% end %>
             <%= link_to edit_user_registration_path, class: "dropdown-item" do %>
               <div class="fa fa-cog"></div>
-              <b>Paramètres</b>
+              <b>Account settings</b>
             <% end %>
             <%= link_to destroy_user_session_path, method: :delete, class: "dropdown-item" do %>
               <div class="fa fa-sign-out-alt"></div>
-              <b>Déconnexion</b>
+              <b>Sign out</b>
             <% end %>
           </div>
         </li>
   <% else %>
     <li class="nav-link">
-      <%= link_to 'Inscription', new_user_registration_path, class: 'btn btn-outline-light' %>
+      <%= link_to 'Sign Up', new_user_registration_path, class: 'btn btn-outline-dark' %>
     </li>
     <li class="nav-link">
-      <%= link_to 'Connexion', new_user_session_path, class: 'btn btn-outline-light' %>
+      <%= link_to 'Log In', new_user_session_path, class: 'btn btn-outline-dark' %>
     </li>
   <% end %>
 </nav>

@@ -23,65 +23,81 @@
     <div class="col-lg-12 col-12">
       <nav class="nav nav-pills nav-fill nav-cat">
         <% @categories.each do |categorie| %>
-                  <%=link_to categorie.name, courses_path(categorie: categorie.name), class:"nav-link"%>
+                  <%= link_to categorie.name, categorie, class:"nav-link" %>
                 <% end %>
   </div>
   </div>
   </div>
-<div class="container-fluid" style="background:url('https://res.cloudinary.com/aseed/image/upload/v1630187453/afripedia/92a752b4-2f5b-45c7-a451-d84b32ccb0cf-removebg-preview_waw227.png')no-repeat;background-size:cover;height: 400px;">
+<div class="container-fluid" style="background:url('https://res.cloudinary.com/aseed/image/upload/v1631495727/afripedia/hero_zygfrh.png')no-repeat;background-size:cover;height: auto;">
   <div class="row">
-    <div class="col-lg-4 offset-lg-1 col-12" style="margin-top:5%;padding: 2.5%;">
-      <h2 class="fw-bold" style="font-size: 40px;">
-        Un apprentissage <br>qui vous ressemble 
+    <div class="col-lg-5 offset-lg-1 col-12" style="margin-top:5%;padding: 2.5%;">
+      <h2 class="text-hero">
+        Un apprentissage qui nous reconnecte à la source 
       </h2>
-      <p>
+      <p class="hero-text">
         Les cours sont à partir de 13,99 $US. Appliquez le code PLUS10 à votre panier pour bénéficier de 10 % de réduction supplémentaires.
       </p>
       <button type="button" class="btn btn-vert">commencer un cours</button>
     </div>
   </div>
 </div>
-<div class="container-fluid bg-white">
+<div class="container-fluid bg-white p-4">
+  <div class="row align-items-center">
+    <div class="col-lg-6 col-12 p-4">
+      <img src="https://res.cloudinary.com/aseed/image/upload/v1631495551/afripedia/unnamed_xv4r1v.jpg" alt="" class="img-fluid">
+    </div>
+    <div class="col-lg-6 col-12 p-4">
+      <h3 class="section-titre">
+        Partagez vos connaissances. 
+      </h3>
+      <p class="section-paragraphe">
+        Créez des cours en ligne et des services de coaching. Transformez votre expérience et votre savoir-faire en une entreprise de connaissances florissante. 
+      </p>
+    </div>
+  </div>
+</div>
+<div class="container-fluid p-4">
   <div class="row">
-    <div class="col-lg-12 col-12">
-      <nav class="nav nav-pills nav-justified">
-        <% @categories.each do |categorie| %>
-                  <%=link_to categorie.name, courses_path(categorie: categorie.name), class:"nav-link"%>
-                <% end %>
-  </div>
-  </div>
-  </div>
-<div class="container">
-  <div class="row">
-    <div class="col-lg-12 col-12">
-      <h3>récents</h3>
+    <div class="col-lg-12 col-12 p-4">
+      <h3 class="section-titre mb-2">Explorez</h3>
 <div class="row row-cols-1 row-cols-md-4 g-4">
   <% @latest_courses.each do |course| %>
   <div class="col">
+    <div class="card h-100">
     <%= render 'courses/course', course: course %>
+    </div>
 </div>
 <% end %>
 </div>
     </div>
-     <div class="col-lg-12 col-12">
-      <h3>populaires</h3>
-      <div class="row row-cols-1 row-cols-md-4 g-4">
-          <% @popular_courses.each do |course| %>
-  <div class="col">
-        <%= render 'courses/course', course: course %>
-  <% end %>
   </div>
 </div>
+<div class="container-fluid bg-white p-4">
+  <div class="row align-items-center">
+    <div class="col-lg-6 offset-lg-3 col-12 p-4">
+      <figure class="text-center">
+  <blockquote class="blockquote">
+    <p>Un peuple sans la connaissance de son<span class="text-success fw-bold"> histoire passée</span>, de son origine et de sa culture est comme un <span class="text-danger fw-bold">arbre sans racines</span>.</p>
+  </blockquote>
+  <figcaption class="blockquote-footer">
+    Marcus Garvey
+  </figcaption>
+</figure>
     </div>
-    <div class="col-lg-12 col-12">
-      <h3>mieux notés</h3>
-      <div class="row row-cols-1 row-cols-md-4 g-4">
-          <% @top_rated_courses.each do |course| %>
-  <div class="col">
-        <%= render 'courses/course', course: course %>
-  <% end %>
   </div>
 </div>
+<div class="container-fluid  p-4">
+  <div class="row align-items-center">
+    <div class="col-lg-6 col-12 p-4">
+      <h3 class="section-titre">
+        Partagez vos connaissances. 
+      </h3>
+      <p class="section-paragraphe">
+        Créez des cours en ligne et des services de coaching. Transformez votre expérience et votre savoir-faire en une entreprise de connaissances florissante. 
+      </p>
+    </div>
+    <div class="col-lg-6 col-12 p-4">
+      <img src="https://res.cloudinary.com/aseed/image/upload/v1631495552/afripedia/unnamed2_eleled.jpg" alt="" class="img-fluid">
     </div>
   </div>
 </div>

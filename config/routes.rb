@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
+  
   devise_for :users
 
   get 'home/index'
   root to: 'home#index'
 
   resources :categories
-
+  resources :dashboard
   resources :courses do
     get :created, :purchased, :published_unapproved, :pending_review, :latest, :top_rated, :popular, on: :collection
     member do

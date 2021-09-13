@@ -1,5 +1,5 @@
-class HomeController < ApplicationController
-  skip_before_action :authenticate_user!, :only => [:index]
+class DashboardController < ApplicationController
+    skip_before_action :authenticate_user!, :only => [:index]
   def index
     @latest_courses = Course.published.approved.order(created_at: :desc).limit(8)
     @top_rated_courses = Course.published.approved.order(average_rating: :desc, created_at: :desc).limit(3)

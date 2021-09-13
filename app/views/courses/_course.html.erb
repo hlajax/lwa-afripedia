@@ -1,76 +1,18 @@
-<div class="card h-100">
-  <%= image_tag course.thumbnail.url, class:"card-img-top" %>
-  <div class="card-body">
-    <h4><%= link_to course.name, course %></h4>
-  </div>
-  <div class="card-footer">
-    <div class="row">
-      <div class="col-md-6">
-        <div class="text-warning fa fa-star"></div>
-        <p><b><%= course.average_rating %></b></p>
-        <p><%=course.subscriptions_count%> <span class="fa fa-user-graduate"></span></p>
+<figure class="snip1423">
+  <%= image_tag course.thumbnail.url %>
+  <figcaption>
+    <h3><%= course.name%></h3>
+    <p><%= course.category.name%></p>
+    <p><%= course.user.username%></p>
+    <!--div class="price">
+      <s>$24.00</s>$19.00
+    </div-->
+        <footer>
+      <div class="date"><%= course.average_rating %></div>
+      <div class="icons">
+        <div class="views"><i class="ion-eye"></i><%=course.subscriptions_count%></div>
+        <div class="love"><i class="ion-heart"></i>623</div>
       </div>
-      <div class="col-md-6 text-right">
-        <div class="fa fa-chalkboard-teacher"></div>
-        <%= link_to course.user.username, user_path(course.user) %>
-      </div>
-    </div>
-  </div>
-  <div class="card-footer">
-    <div class="text-center">
-      <!--logic in courses_helper.rb
-      -->
-      <%= subscription_buttons(course) %>
-      <div class="row"></div>
-      <%= review_buttons(course) %>
-      <!--- if course.bought(current_user) == false
-      -->
-      <!--  Bought
-      -->
-      <!--- else
-      -->
-      <!--  Buy
-      -->
-    </div>
-  </div>
-  <% if current_user %>
-    <% if policy(course).edit? %>
-      <div class="card-footer">
-        <%= link_to 'Add a lesson', new_course_lesson_path(course, @lesson), class: 'btn btn-sm btn-primary' %>
-        <%= link_to 'Edit', edit_course_path(course), class: 'btn btn-sm btn-warning' %>
-        <%= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger' %>
-      </div>
-    <% end %>
-    <% if policy(course).destroy? %>
-      <div class="card-footer">
-        <% if course.published? %>
-          <div class="badge badge-success">
-            published
-          </div>
-        <% else %>
-          <div class="badge badge-danger">
-            published
-          </div>
-        <% end %>
-        <% if course.approved? %>
-          <div class="badge badge-success">
-            approved
-          </div>
-        <% else %>
-          <div class="badge badge-danger">
-            approved
-          </div>
-        <% end %>
-      </div>
-    <% end %>
-    <% if policy(course).approve? %>
-      <div class="card-footer">
-        <% if course.approved? %>
-          <%= link_to 'Disapprove', disapprove_course_path(course), method: :patch, class: 'btn btn-sm btn-primary' %>
-        <% else %>
-          <%= link_to 'Approve', approve_course_path(course), method: :patch, class: 'btn btn-sm btn-primary' %>
-        <% end %>
-      </div>
-    <% end %>
-  <% end %>
-</div>
+    </footer>
+  <%= link_to "", course %>
+</figure>

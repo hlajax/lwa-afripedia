@@ -1,0 +1,40 @@
+<div class="row bg-white">
+  <div class="col-lg-12 col-12 sticky-top top-menu p-3">
+        <% unless lesson.prev.nil? %>
+      <div class="float-left">
+        <%= link_to ('<i class="fa fa-arrow-left"></i> Leçon précédente').html_safe, course_lesson_path(@course, lesson.prev), class: "btn btn-sm btn-jaune" %>
+      </div>
+    <% end %>
+    <% unless lesson.next.nil? %>
+      <div class="float-right">
+        <%= link_to ('Leçon suivante <i class="fa fa-arrow-right"></i>').html_safe, course_lesson_path(@course, lesson.next), class: "btn btn-sm btn-jaune" %>
+      </div>
+    <% end %>
+  </div>
+  <div class="col-lg-12 col-12 p-4">
+    <h3 class="fw-bold">
+      <%=lesson.row_order_rank + 1%>. <%= lesson.name %>
+    </h3>
+    <div class="float-right">
+      <% if policy(lesson).edit? %>
+        <%= link_to 'Modifier', edit_course_lesson_path(@course, lesson), class: 'btn btn-sm btn-warning' %>
+      <% end %>
+      <% if policy(lesson).destroy? %>
+        <%= link_to 'Supprimer', [@course, lesson], method: :delete, data: { confirm: 'Vous êtes sûr?' }, class: 'btn btn-sm btn-danger' %>
+      <% end %>
+    </div> 
+  </div>
+  <div class="col-lg-12 col-12 p-4">
+      <!-- if lesson.video_url.present? %>
+    <div class="embed-responsive embed-responsive-16by9">
+      <iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" frameborder="0" height="315" src="= lesson.embed_url>" width="560"></iframe>
+    </div>
+  <end -->
+    <% if lesson.video_url.present? %>
+    <%= raw(lesson.video_url) %>
+  <% end %>
+  <div class="card-footer">
+    <%= raw(lesson.description) %>
+  </div>
+  </div>
+</div>

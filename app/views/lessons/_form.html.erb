@@ -4,16 +4,14 @@
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
   <div class="form-inputs">
     <%= f.input :name, input_html: { autocomplete: 'nope' } %>
-    <!--= f.input :video_url, :input_html => {:rows => 1}
-    -->
-    <!--= f.input :description, :input_html => {:rows => 7}
-    -->
+    <%= f.input :video_url, :input_html => {:rows => 1}%>
+    <!--= f.text_field :video_url, :input_html => {:rows => 1}-->
+    <%= f.input :description, :input_html => {:rows => 7}%>
     <!--= f.input :row_order
     -->
     <%= f.text_area :description, id: :post_body, hidden: true %>
-    <trix>-editor{:input => "post_body"}</trix>
   </div>
   <div class="form-actions">
-    <%= f.button :submit, class: 'btn btn-md btn-primary' %>
+    <%= f.button :submit, class: 'btn btn-primary' %>
   </div>
 <% end %>

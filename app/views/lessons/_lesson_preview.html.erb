@@ -1,0 +1,29 @@
+<% if current_user && policy(lesson).show? %>
+  <% if lesson.viewed(current_user) == true %>
+    <div class="text-danger fa fa-times"></div>
+  <% else %>
+    <div class="text-success fa fa-check"></div>
+  <% end %>
+  <%= link_to course_lesson_path(@course, lesson) do %>
+    <b>
+      <%=lesson.row_order_rank + 1%>.
+    </b>
+    <%= lesson.name %>
+  <% end %>
+  <div class="float-right">
+    <% if policy(lesson).edit? %>
+      <div class="fa fa-sort"></div>
+      <%= link_to 'Modifier', edit_course_lesson_path(@course, lesson), class: 'btn btn-sm btn-warning' %>
+    <% end %>
+    <% if policy(lesson).destroy? %>
+      <%= link_to 'Supprimer', [@course, lesson], method: :delete, data: { confirm: 'Vous êtes sûr?' }, class: 'btn btn-sm btn-danger' %>
+    <% end %>
+  </div>
+<% else %>
+  <%= link_to course_lesson_path(@course, lesson) do %>
+    <b>
+      <%=lesson.row_order_rank + 1%>.
+    </b>
+    <%= lesson.name %>
+  <% end %>
+<% end %>

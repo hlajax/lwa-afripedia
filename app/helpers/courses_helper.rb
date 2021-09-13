@@ -33,7 +33,7 @@ module CoursesHelper
         else
           "<i class='text-warning fa fa-star'></i>".html_safe + " " +
           "<i class='fa fa-check'></i>".html_safe + " " +
-          "You have reviewed"
+          "Vous avez noté"
         end
       end
     end

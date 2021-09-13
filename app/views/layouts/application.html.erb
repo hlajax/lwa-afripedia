@@ -4,7 +4,7 @@
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>
-      <%= content_for?(:title) ? yield(:title) : "EDURGE - Online courses - Anytime, Anywhere" %>
+      <%= content_for?(:title) ? yield(:title) : "AfriPédia - L'histoire à tout moment et en tout lieu" %>
     </title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -13,6 +13,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;800&display=swap" rel="stylesheet">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+     <script src="https://cdn.tiny.cloud/1/15tc7oc36rxnouo2cz210ck40fm0js489kdx95chux0rr8y8/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= favicon_link_tag 'https://i.imgur.com/LaIANar.png' %>
   </head>
@@ -20,5 +21,12 @@
       <%= yield %>
       <%= render 'layouts/footer'     %>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+        <script>
+    tinymce.init({
+      selector: 'textarea',
+      plugins: 'advlist autolink lists link image charmap print preview hr anchor pagebreak media',
+      toolbar_mode: 'floating',
+   });
+  </script>
   </body>
 </html>
