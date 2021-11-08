@@ -2,8 +2,14 @@ Rails.application.routes.draw do
   
   devise_for :users
 
-  get 'home/index'
-  root to: 'home#index'
+      devise_scope :user do
+    authenticated  do
+      root 'courses#index'
+    end
+    unauthenticated do
+      root 'home#index', as: :visitors_url
+    end
+  end 
 
   resources :categories
   resources :dashboard

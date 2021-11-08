@@ -1,18 +1,19 @@
 <figure class="snip1423">
-  <%= image_tag course.thumbnail.url %>
+  <div style="background: url('<%= course.thumbnail.url %>')no-repeat;height: 200px;background-size:cover;"></div>
   <figcaption>
     <h3><%= course.name%></h3>
-    <p><%= course.category.name%></p>
-    <p><%= course.user.username%></p>
-    <!--div class="price">
-      <s>$24.00</s>$19.00
-    </div-->
-        <footer>
-      <div class="date"><%= course.average_rating %></div>
-      <div class="icons">
-        <div class="views"><i class="ion-eye"></i><%=course.subscriptions_count%></div>
-        <div class="love"><i class="ion-heart"></i>623</div>
+    <div class="row mt-4 align-items-center">
+      <div class="col-lg-6 col-12">
+        <p class="float-start"><%= course.category.name%></p>
       </div>
-    </footer>
+      <div class="col-lg-6 col-12">
+        <p class="float-end"><%= course.user.username%></p>
+      </div>
+    </div>
+    <div class="row mt-4 align-items-center">
+      <div class="col-lg-6 col-12">
+        <p class="float-start"><%= course.average_rating %></p>
+      </div>
+    </div>
   <%= link_to "", course %>
 </figure>

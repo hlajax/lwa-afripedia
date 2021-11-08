@@ -32,7 +32,11 @@
         <span>Auteur: <%= @course.user.username%></span>
         <span> Notes: <%= @course.average_rating %></span>
         <span> Inscrits:<%=@course.subscriptions_count%></span>
+        <span>Prix:<%= number_to_currency(@course.price) %></span>
       </p>
+      <div class="d-grid gap-2">
+        <%= subscription_buttons(@course) %>
+</div>
     </div>
   </div>
 </div>
@@ -110,6 +114,7 @@
       <div class="row"></div>
       <b>Prix:</b>
       <%= number_to_currency(@course.price) %>
+      <%= subscription_buttons(@course) %>
   </div>
 </div>
 </div>

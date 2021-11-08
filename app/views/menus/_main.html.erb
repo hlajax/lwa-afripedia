@@ -1,4 +1,4 @@
- <nav class="nav justify-content-center">
+ <nav class="nav float-end">
   <% if current_user %>
         <li class="nav-item">
           <%= link_to categories_path, class: 'nav-link' do %>
@@ -127,9 +127,4 @@
       <%= link_to 'Connexion', new_user_session_path, class: 'btn btn-outline-light' %>
     </li>
   <% end %>
-</nav>
-
-    </div>
-  </div>
-</div>
 </nav>
