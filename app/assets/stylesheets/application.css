@@ -389,7 +389,7 @@ a{
   background-color: #2980b9;
 }
 
-@media (min-width: 360px) and (max-width: 440px)  {
+@media (min-width: 320px) and (max-width: 440px)  {
 
 .home-gradient{
   background: linear-gradient(90deg, rgba(0,0,0,1) 100%, rgba(216,164,36,1) 0%);
