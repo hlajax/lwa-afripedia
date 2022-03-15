@@ -1,9 +1,9 @@
-<div class="container-fluid text-white" style="background: linear-gradient(90deg, rgba(0,0,0,1) 70%, rgba(216,164,36,1) 70%);">
+<div class="container-fluid home-gradient text-white">
   <div class="row align-items-center pt-4 mb-4">
-        <div class="col-lg-2">
-      <img src="https://res.cloudinary.com/aseed/image/upload/v1635638053/afripedia/logo-transparent_rqxi2y.png" alt="" class="img-fluid">
+        <div class="col-lg-2 col-4 offset-4 offset-lg-0 mb-2 mb-lg-0">
+      <img src="https://res.cloudinary.com/aseed/image/upload/v1647374637/afripedia/logo-transparent_tcwj4i.png" alt="" class="img-fluid">
     </div>
-    <div class="col-lg-5">
+    <div class="col-lg-5 col-12">
       <%= form_tag(courses_path, class:"row row-cols-lg-auto g-3 align-items-center", method: :get) do %>
             <div class="input-group mb-3">
               <%= text_field_tag :name, params[:name], autocomplete: 'off', placeholder: "Trouver un cours", class: 'form-control' %>
@@ -75,7 +75,7 @@
     </div>
   </div>
 </div>
-<div class="container-fluid bg-noir p-4">
+<div class="container bg-noir p-4">
   <div class="row">
     <div class="col-lg-12 col-12 p-4">
       <h3 class="section-titre text-white mb-4">Explorez</h3>

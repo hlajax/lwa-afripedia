@@ -18,7 +18,7 @@
  */
 @import url('https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+Antique:wght@300;400;900&display=swap');
 body{
-	background-color:#f6eedb;
+	background-color:#000000;
 	color:#000000;
 }
 a{
@@ -32,6 +32,9 @@ a{
   background: url('https://res.cloudinary.com/aseed/image/upload/v1636218794/afripedia/mosaic_avuh9k.png')no-repeat;
   background-size: cover;
   background-position: center;
+}
+.home-gradient{
+  background: linear-gradient(90deg, rgba(0,0,0,1) 70%, rgba(216,164,36,1) 70%);
 }
 .home-left-gradient{  
   background: linear-gradient(90deg, rgba(30,19,15,1) 0%, rgba(30,19,15,1) 35%, rgba(30,19,15,0.3757702910265669) 71%);
@@ -384,4 +387,16 @@ a{
 .snip1423:hover i,
 .snip1423.hover i {
   background-color: #2980b9;
+}
+
+@media (min-width: 360px) and (max-width: 440px)  {
+
+.home-gradient{
+  background: linear-gradient(90deg, rgba(0,0,0,1) 100%, rgba(216,164,36,1) 0%);
+}
+
+
+
+
+
 }
